@@ -16,4 +16,4 @@ Finally, call the methods to start logging!
     logger.info("Enjoy the logs!")
 
 ## Changelog
-* V1.0 - 230804,    created basic csv log functionalities
+* V1.0 - 230804,    created basic csv log functionalities, added docstrings
