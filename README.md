@@ -19,4 +19,6 @@ Finally, call the methods to start logging!
 
 ### Changelog
 * V1.0 - 230803,    created basic csv log functionalities, added docstrings
-* V1.1 - 230804,    added possibility to output logs to console
+* V1.1 - 230804,    
+    * added possibility to output logs to console 
+    * dynamic levels support (keep amount of chars under 8 for the sake of neat logs)!

@@ -32,10 +32,13 @@ class CsvLogger:
 
     def log(self, level, msg):
         """Logs a message with the specified level."""
-        log_entry = [datetime.now().strftime('%H:%M:%S'), level.upper().ljust(8), msg]
+        log_entry = [datetime.now().strftime('%H:%M:%S'), level.upper(), msg]
         self.logwriter.writerow(log_entry)
         self.logfile.flush()
         
         if self.output_to_console:
-            print('\t'.join(log_entry))
-
+            level_upper = level.upper()
+            spaces_needed = 4 - len(level_upper) % 4
+            spaces = ' ' * spaces_needed
+            formatted_log_entry = [datetime.now().strftime('%H:%M:%S'), level_upper + spaces, msg]
+            print('\t'.join(formatted_log_entry))
