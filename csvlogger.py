@@ -1,7 +1,7 @@
-from datetime import datetime as dt
+from datetime import datetime
 import csv
 
-class CsvLogger(object):
+class CsvLogger:
     """
     CsvLogger is a simple logging utility that writes log entries to a CSV file.
 
@@ -11,40 +11,31 @@ class CsvLogger(object):
     Attributes:
         logfile (file): The file object for the log file.
         logwriter (csv.writer): CSV writer object for writing to the log file.
+        output_to_console (bool): Whether to also print log messages to the console.
 
     Methods:
-        info(msg): Logs an informational message.
-        success(msg): Logs a success message.
-        error(msg): Logs an error message.
-        warning(msg): Logs a warning message.
+        log(level, msg): Logs a message with level passed as an argument.
     """
-    def __init__(self, filename):
+    def __init__(self, filename, output_to_console=False):
         """
-        Constructs a CsvLogger that writes to the specified csv file.
+        Constructs a CsvLogger that writes to the specified file.
 
         Parameters:
-            filename (str): The name of the log file.
+            filename (str): the name of the log file.
+            output_to_console (bool, optional): print log messages to console,
+                defaults to False.
         """
         self.logfile = open(filename, 'w', newline='')
         self.logwriter = csv.writer(self.logfile)
         self.logwriter.writerow(['Time', 'Level', 'Message'])
+        self.output_to_console = output_to_console
 
-    def info(self, msg):
-        """Logs an informational message."""
-        self.logwriter.writerow([dt.now().strftime('%H:%M:%S'), 'INFO', msg])
+    def log(self, level, msg):
+        """Logs a message with the specified level."""
+        log_entry = [datetime.now().strftime('%H:%M:%S'), level.upper().ljust(8), msg]
+        self.logwriter.writerow(log_entry)
         self.logfile.flush()
+        
+        if self.output_to_console:
+            print('\t'.join(log_entry))
 
-    def success(self, msg):
-        """Logs a success message."""
-        self.logwriter.writerow([dt.now().strftime('%H:%M:%S'), 'SUCCESS', msg])
-        self.logfile.flush()
-
-    def error(self, msg):
-        """Logs an error message."""
-        self.logwriter.writerow([dt.now().strftime('%H:%M:%S'), 'ERROR', msg])
-        self.logfile.flush()
-
-    def warning(self, msg):
-        """Logs a warning message."""
-        self.logwriter.writerow([dt.now().strftime('%H:%M:%S'), 'WARNING', msg])
-        self.logfile.flush()

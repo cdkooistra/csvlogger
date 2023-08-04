@@ -9,13 +9,14 @@ To use in any Python script, import as shown here:
 
     from csvlogger import CsvLogger
 
-Then initialize object with the name of ur desired csv log as its only argument
+Then initialize object with the name of ur desired csv log and whether or not to output to console (False by default)
 
-    logger = CsvLogger(ur_desired_file_name_here.csv)
+    logger = CsvLogger(ur_desired_file_name_here.csv, output_to_console=True/False)
 
 Finally, call the methods to start logging!
 
-    logger.info("Enjoy the logs!")
+    logger.log('info', "Enjoy the logs!")
 
 ### Changelog
-* V1.0 - 230804,    created basic csv log functionalities, added docstrings
+* V1.0 - 230803,    created basic csv log functionalities, added docstrings
+* V1.1 - 230804,    added possibility to output logs to console
