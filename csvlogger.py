@@ -37,8 +37,5 @@ class CsvLogger:
         self.logfile.flush()
         
         if self.output_to_console:
-            level_upper = level.upper()
-            spaces_needed = 4 - len(level_upper) % 4
-            spaces = ' ' * spaces_needed
-            formatted_log_entry = [datetime.now().strftime('%H:%M:%S'), level_upper + spaces, msg]
-            print('\t'.join(formatted_log_entry))
+            padding = ' ' * (4 - len(level.upper()) % 4)
+            print('\t'.join(datetime.now().strftime('%H:%M:%S'), level.upper() + padding, msg))
