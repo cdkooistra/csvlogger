@@ -38,4 +38,4 @@ class CsvLogger:
         
         if self.output_to_console:
             padding = ' ' * (4 - len(level.upper()) % 4)
-            print('\t'.join(datetime.now().strftime('%H:%M:%S'), level.upper() + padding, msg))
+            print('\t'.join([datetime.now().strftime('%H:%M:%S'), level.upper() + padding, msg]))
