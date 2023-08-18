@@ -18,7 +18,15 @@ Finally, call the methods to start logging!
     logger.log('info', "Enjoy the logs!")
 
 ### Changelog
-* V1.0 - 230803,    created basic csv log functionalities, added docstrings
+* V1.0 - 230803,    
+    * created basic csv log functionalities
+    * added docstrings
 * V1.1 - 230804,    
     * added possibility to output logs to console 
     * dynamic levels support (keep amount of chars under 8 for the sake of neat logs)!
+* V1.2 - 230818,
+    * changed class to work asynchronously for all I/O operations
+    * added error handling (and a retry mechanism) for writing to the .csv file
+    * expanded docstrings
+
+      
