@@ -1,8 +1,5 @@
 from datetime import datetime
-import csv
-import threading
-import queue
-import time
+import csv, threading, queue, time
 
 class CsvLogger:
     """
