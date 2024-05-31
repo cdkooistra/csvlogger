@@ -91,6 +91,8 @@ class CsvLogger:
             padding = ' ' * (4 - len(level.upper()) % 4)
             print('\t'.join([datetime.now().strftime('%H:%M:%S'), level.upper() + padding, msg]))
 
+        return log_entry
+
     def close(self):
         """
         Should be called to ensure that all log messages in the queue 
