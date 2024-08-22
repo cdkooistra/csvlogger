@@ -28,5 +28,6 @@ Finally, call the methods to start logging!
     * changed class to work asynchronously for all I/O operations
     * added error handling (and a retry mechanism) for writing to the .csv file
     * expanded docstrings
-
-      
+* V1.3 - 240822,
+    * added possbility to end log without newline
+    * fixed class init to properly append already existing logs

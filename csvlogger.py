@@ -31,10 +31,14 @@ class CsvLogger:
                 defaults to False.
         """
 
-        self.logfile = open(filename, 'w', newline='')
+        self.logfile = open(filename, 'a', newline='')
         self.logwriter = csv.writer(self.logfile)
-        self.logwriter.writerow(['Time', 'Level', 'Message'])
+
+        if self.logfile.tell() == 0:
+            self.logwriter.writerow(['Time', 'Level', 'Message'])
+        
         self.output_to_console = output_to_console
+        self.timestamp = "%y%m%d@%H:%M:%S"
 
         self.queue = queue.Queue()
         self.thread = threading.Thread(target=self.write)
@@ -73,7 +77,7 @@ class CsvLogger:
                 if self.output_to_console:
                     print(f"Failed to write log: Dropping log entry.")
 
-    def log(self, level, msg):
+    def log(self, level, msg, end=True, print_to_console=True):
         """
         Logs a message with the specified level to the CSV file and, 
         if enabled, prints it to the console.
@@ -83,13 +87,13 @@ class CsvLogger:
             msg (str): The actual log message content.
         """
 
-        log_entry = [datetime.now().strftime('%H:%M:%S'), level.upper(), msg]
+        log_entry = [datetime.now().strftime(self.timestamp), level.upper(), msg]
 
         self.queue.put(log_entry)
         
-        if self.output_to_console:
+        if self.output_to_console and print_to_console:
             padding = ' ' * (4 - len(level.upper()) % 4)
-            print('\t'.join([datetime.now().strftime('%H:%M:%S'), level.upper() + padding, msg]))
+            print('\t'.join([f"{datetime.now().strftime(self.timestamp)} ", level.upper() + padding, msg]), end='\n' if end else '')
 
         return log_entry
 
